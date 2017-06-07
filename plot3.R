@@ -1,0 +1,13 @@
+consumptiondata<-read.table("household_power_consumption.txt",header=T,sep = ";",na.strings = "?")
+consumptiondata$Date<-as.Date(consumptiondata$Date,format="%d/%m/%Y")
+powerdata<-subset(consumptiondata,subset = (Date >= "2007-02-01" & Date <= "2007-02-02"))
+rm(consumptiondata)
+datetime<-paste(as.Date(powerdata$Date),powerdata$Time)
+powerdata$datetime<-as.POSIXct(datetime)
+
+columnlines<-c("black","red","blue")
+caption<-c("Sub_metering_1","Sub_metering_2","Sub_metering_3")
+plot(powerdata$datetime,powerdata$Sub_metering_1,type="lines",col=columnlines[1],xlab = "",ylab = "Energy sub metering")
+lines(powerdata$datetime,powerdata$Sub_metering_2,col=columnlines[2])
+lines(powerdata$datetime,powerdata$Sub_metering_3,col=columnlines[3])
+legend("topright",col = columnlines,legend = caption,lty = "solid")
