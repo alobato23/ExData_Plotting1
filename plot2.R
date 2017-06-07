@@ -1,0 +1,1 @@
+plot(powerdata$datetime,powerdata$Global_active_power,type="lines",xlab = "",ylab = "Global Active Power (kilowatts)")
